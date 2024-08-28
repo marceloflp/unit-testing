@@ -1,4 +1,4 @@
-package br.com.unitesting.springboot;
+package br.com.unitesting.springboot.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
