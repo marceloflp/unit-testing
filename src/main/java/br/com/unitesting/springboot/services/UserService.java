@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.unitesting.springboot.entities.User;
 import br.com.unitesting.springboot.repositories.UserRepository;
+import br.com.unitesting.springboot.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -16,7 +17,7 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> user = repository.findById(id);
-		return user.get();
+		return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado"));
 	}
 	
 }
