@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.unitesting.springboot.entities.User;
+import br.com.unitesting.springboot.entities.dto.UserDTO;
 import br.com.unitesting.springboot.services.UserService;
 
 @RestController
@@ -18,8 +18,8 @@ public class UserController {
 	private UserService service;
 	
 	@GetMapping(value = "/findById/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){
-		User obj = service.findById(id);
+	public ResponseEntity<UserDTO> findById(@PathVariable Long id){
+		UserDTO obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);	
 	}
 
