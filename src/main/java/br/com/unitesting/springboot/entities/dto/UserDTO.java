@@ -1,6 +1,6 @@
 package br.com.unitesting.springboot.entities.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDTO {
 
@@ -8,7 +8,8 @@ public class UserDTO {
 	private String nome;
 	private String email;
 	
-	@JsonIgnore
+	//@JsonIgnore //IGNORA senha durante processamento
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //SENHA SERÁ APENAS ESCRITA, MAS NÃO RETORNADA
 	private String senha;
 
 	public UserDTO(Long id, String nome, String email, String senha) {

@@ -30,6 +30,10 @@ public class UserService {
 				.collect(Collectors.toList());
 	}
 	
+	public User create(User obj) {
+		return repository.save(obj);
+	}
+	
 	private UserDTO convertDTO(User user) {
 		return new UserDTO(user.getId(), user.getNome(), user.getEmail(), user.getSenha());
 	}
