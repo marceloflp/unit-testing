@@ -1,5 +1,7 @@
 package br.com.unitesting.springboot.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,4 +25,9 @@ public class UserController {
 		return ResponseEntity.ok().body(obj);	
 	}
 
+	@GetMapping(value = "/findAll")
+	public ResponseEntity<List<UserDTO>> findAll(){
+		List<UserDTO> users = service.findAll();
+		return ResponseEntity.ok().body(users);
+	}
 }

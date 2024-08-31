@@ -1,5 +1,8 @@
 package br.com.unitesting.springboot.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,13 @@ public class UserService {
 		return convertDTO(user);
 	}
 
+	public List<UserDTO> findAll() {
+		List<User> listUsers = repository.findAll();
+		return listUsers.stream()
+				.map(usuario -> new UserDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha()))
+				.collect(Collectors.toList());
+	}
+	
 	private UserDTO convertDTO(User user) {
 		return new UserDTO(user.getId(), user.getNome(), user.getEmail(), user.getSenha());
 	}
