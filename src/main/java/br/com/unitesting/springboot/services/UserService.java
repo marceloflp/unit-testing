@@ -1,6 +1,7 @@
 package br.com.unitesting.springboot.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.unitesting.springboot.entities.User;
 import br.com.unitesting.springboot.entities.dto.UserDTO;
 import br.com.unitesting.springboot.repositories.UserRepository;
+import br.com.unitesting.springboot.services.exceptions.DataIntegratyViolationException;
 import br.com.unitesting.springboot.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -31,7 +33,15 @@ public class UserService {
 	}
 	
 	public User create(User obj) {
+		findByEmail(obj);
 		return repository.save(obj);
+	}
+	
+	private void findByEmail(User obj) {
+		Optional<User> user = repository.findByEmail(obj.getEmail());
+		if(user.isPresent()) {
+			throw new DataIntegratyViolationException("E-mail já cadastrado no sistema");
+		}
 	}
 	
 	private UserDTO convertDTO(User user) {
